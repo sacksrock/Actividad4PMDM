@@ -15,6 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by JuanmaJR on 10/12/2017.
  */
@@ -107,7 +110,17 @@ public class FireBaseAdmin {
 
     }
 
+    public void insertarEnRama(String rutaRama, Map<String,Object> valores){
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put(rutaRama, valores);
 
-}
+            myRefRaiz.updateChildren(childUpdates);
+        }
+
+
+    }
+
+
+
 
 
