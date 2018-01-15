@@ -8,6 +8,7 @@ import android.util.Log;
 import com.example.juanmajr.flclase.Adapters.ListaCochesAdapter;
 import com.example.juanmajr.flclase.FBObjects.FBCoche;
 import com.example.milib.AsyncTasks.HTTPAsyncTask;
+import com.example.milib.AsyncTasks.HttpJSONAsyncsTask;
 import com.example.milib.ListaFragment;
 import com.example.milib.DetallesFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -63,8 +64,10 @@ public class SecondActivity extends AppCompatActivity {
             gpsTracker.showSettingsAlert();
         }
 
-        HTTPAsyncTask httpAsyncTask=new HTTPAsyncTask();
-        httpAsyncTask.execute("http://www.google.com");
+        HttpJSONAsyncsTask httpJSONAsyncsTask=new HttpJSONAsyncsTask();
+        String url= String.format("http://api.openweathermap.org/data/2.5/weather?id=%s&appid=%s",
+                "3117732",DataHolder.instance.API_KEY);
+        httpJSONAsyncsTask.execute(url);
 
     }
 }

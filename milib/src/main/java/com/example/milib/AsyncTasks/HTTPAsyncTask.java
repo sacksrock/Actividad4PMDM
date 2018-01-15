@@ -30,11 +30,10 @@ public class HTTPAsyncTask extends AsyncTask<String, Integer, String>{
     protected String doInBackground(String... urls) {
         int count;
         String pathfin=null;
-
+    for (int i=0;i<urls.length;i++) {
         try {
             String root = Environment.getExternalStorageDirectory().toString();
-
-            System.out.println("Downloading");
+            Log.v("HttpAsyncTask", "Downloading");
             URL url = new URL(urls[0]);
 
             URLConnection conection = url.openConnection();
@@ -46,14 +45,16 @@ public class HTTPAsyncTask extends AsyncTask<String, Integer, String>{
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             // Output stream to write file
-            pathfin=root+"/downloadedfile.jpg";
-            OutputStream output = new FileOutputStream(root+"/downloadedfile.jpg");
+            pathfin = root + "/downloadedfile.jpg";
+            OutputStream output = new FileOutputStream(pathfin);
             byte data[] = new byte[1024];
 
+            int contador = 0;
             long total = 0;
             while ((count = input.read(data)) != -1) {
                 total += count;
-
+                contador = contador + 5;
+                this.publishProgress(contador);
                 // writing data to file
                 output.write(data, 0, count);
 
@@ -69,13 +70,14 @@ public class HTTPAsyncTask extends AsyncTask<String, Integer, String>{
         } catch (Exception e) {
             Log.e("Error: ", e.getMessage());
         }
-
+    }
         return pathfin;
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
+        Log.v("HttpAsyncTask","Downloading");
     }
 
     @Override

@@ -25,7 +25,7 @@ public class DetallesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_detalles, container, false);
+         View v = inflater.inflate(R.layout.fragment_detalles, container, false);
 
         tvcuerpo= v.findViewById(R.id.tvcuerpo);
         tvtitulo= v.findViewById(R.id.tvtitulo);
