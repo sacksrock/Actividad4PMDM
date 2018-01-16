@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityEvents mainActivityEvents = new MainActivityEvents(this);
 
-
         loginFragment.setListener(mainActivityEvents);
         registerFragment.setListener(mainActivityEvents);
         DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         transition.show(loginFragment);
         transition.hide(registerFragment);
         transition.commit();
+
 
 
 
