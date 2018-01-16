@@ -68,6 +68,9 @@ public class SecondActivity extends AppCompatActivity {
         String url= String.format("http://api.openweathermap.org/data/2.5/weather?id=%s&appid=%s",
                 "3117732",DataHolder.instance.API_KEY);
         httpJSONAsyncsTask.execute(url);
+        HttpJSONAsyncsTask httpJSONAsyncsTask1=new HttpJSONAsyncsTask();
+        String url1= String.format("http://10.0.2.2/BaloncestoJSONServer/prueba.php");
+        httpJSONAsyncsTask1.execute(url1);
 
     }
 }
@@ -86,6 +89,7 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
     @Override
     public void FireBaseAdmin_RamaDescargada(String rama, DataSnapshot dataSnapshot) {
         if(rama.equals("Noticias")){
+            quitarViejosPines();
             GenericTypeIndicator<ArrayList<FBCoche>> indicator = new GenericTypeIndicator<ArrayList<FBCoche>>(){};
             noticias = dataSnapshot.getValue(indicator);
 
