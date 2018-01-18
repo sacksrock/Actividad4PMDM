@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,15 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 
 /**
@@ -28,6 +38,7 @@ public class LoginFragment extends Fragment {
     public Button btnLogin;
     public Button btnRegister;
     public Button login_button;
+    TwitterLoginButton login_Tbutton;
     public LoginFragmentEvents events;
     public LoginFragmentListener listener;
     CallbackManager callbackManager;
@@ -44,15 +55,18 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Twitter.initialize(getActivity());
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         callbackManager = CallbackManager.Factory.create();
         //asignacion de elementos
+
         etUsername=v.findViewById(R.id.etusername);
         etPass=v.findViewById(R.id.etpass);
         btnLogin=v.findViewById(R.id.btnlogin);
         btnRegister=v.findViewById(R.id.btnregister);
         login_button=v.findViewById(R.id.login_button);
+        login_Tbutton=v.findViewById(R.id.login_Tbutton);
         //login_button.setReadPermissions("email");
 
         //inicializacion de events
@@ -61,8 +75,20 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(events);
         btnRegister.setOnClickListener(events);
         login_button.setOnClickListener(events);
+        login_Tbutton.setOnClickListener(events);
 
 
+        login_Tbutton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // Do something with result, which provides a TwitterSession for making API calls
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+            }
+        });
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -83,8 +109,16 @@ public class LoginFragment extends Fragment {
                     }
                 });
 
-
+       /* TwitterConfig config = new TwitterConfig.Builder(getActivity())
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig("SQWuXKhwIFbY6lWjphuNVWrPo", "0Kyn5VxcbR1Id0kg15iLNVar4sa3U5bkpXckXDcu3MmqK0n9HR"))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+*/
         return v;
+
+
     }
 
     @Override
