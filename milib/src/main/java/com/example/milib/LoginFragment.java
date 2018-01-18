@@ -1,8 +1,10 @@
 package com.example.milib;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +41,11 @@ public class LoginFragment extends Fragment {
         this.listener = listener;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
-
         callbackManager = CallbackManager.Factory.create();
         //asignacion de elementos
         etUsername=v.findViewById(R.id.etusername);
@@ -87,6 +87,12 @@ public class LoginFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        listener.cambiarPantalla();
+
+    }
 }
 
 class LoginFragmentEvents implements View.OnClickListener{

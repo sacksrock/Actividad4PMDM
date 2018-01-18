@@ -7,7 +7,7 @@ package com.example.milib;
 public interface LoginFragmentListener {
     public void loginFragmentLoginButtonClicked(String sUser, String sPass);
     public void loginFragmentRegisterButtonClicked();
-
+    public void cambiarPantalla();
 
 
 }

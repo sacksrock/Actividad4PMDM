@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        loginFragment.onActivityResult(requestCode, resultCode, data);
+    }
 }
 
 class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener, FireBaseAdminListener{
@@ -109,6 +115,13 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
     public void FireBaseAdmin_RamaDescargada(String rama, DataSnapshot dataSnapshot) {
 
     }
+
+    public void cambiarPantalla(){
+        Intent intent = new Intent(mainActivity,SecondActivity.class);
+        mainActivity.startActivity(intent);
+        mainActivity.finish();
+    }
+
 
 
 }
