@@ -2,6 +2,7 @@ package com.example.juanmajr.flclase;
 
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +12,10 @@ import com.example.milib.LoginFragment;
 import com.example.milib.LoginFragmentListener;
 import com.example.milib.RegisterFragment;
 import com.example.milib.RegisterFragmentListener;
+import com.facebook.AccessToken;
 import com.google.firebase.database.DataSnapshot;
 import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterSession;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -117,12 +120,23 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
 
     }
 
+
+
     public void cambiarPantalla(){
         Intent intent = new Intent(mainActivity,SecondActivity.class);
         mainActivity.startActivity(intent);
         mainActivity.finish();
     }
 
+    @Override
+    public void loginFragmentLoginFacebook(FragmentActivity fragmentActivity,AccessToken accessToken) {
+        DataHolder.instance.fireBaseAdmin.handleFacebookAccessToken(fragmentActivity,accessToken);
+    }
+
+    @Override
+    public void handleTwitterSession(FragmentActivity fragmentActivity, TwitterSession session) {
+        DataHolder.instance.fireBaseAdmin.handleTwitterSession(fragmentActivity, session);
+    }
 
 
 }
