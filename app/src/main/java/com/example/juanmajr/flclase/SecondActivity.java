@@ -18,6 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
 
@@ -71,6 +72,8 @@ public class SecondActivity extends AppCompatActivity {
         HttpJSONAsyncsTask httpJSONAsyncsTask1=new HttpJSONAsyncsTask();
         String url1= String.format("http://10.0.2.2/BaloncestoJSONServer/prueba.php");
         httpJSONAsyncsTask1.execute(url1);
+
+        FirebaseCrash.log("creada");
 
     }
 }
